@@ -1,19 +1,600 @@
-<!doctype html>
-<html>
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<title>My static Space</title>
-		<link rel="stylesheet" href="style.css" />
-	</head>
-	<body>
-		<div class="card">
-			<h1>Welcome to your static Space!</h1>
-			<p>You can modify this app directly by editing <i>index.html</i> in the Files and versions tab.</p>
-			<p>
-				Also don't forget to check the
-				<a href="https://huggingface.co/docs/hub/spaces" target="_blank">Spaces documentation</a>.
-			</p>
-		</div>
-	</body>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Urban - Mobilidade Urbana Inteligente</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0A0A0A;
+            color: #EAEAEA;
+            overflow-x: hidden;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 15% 25%, rgba(180, 180, 180, 0.1), transparent 35%),
+                        radial-gradient(circle at 85% 75%, rgba(150, 150, 150, 0.08), transparent 40%);
+            z-index: -1;
+            animation: moveAurora 25s infinite linear alternate;
+            pointer-events: none;
+        }
+        
+        @keyframes moveAurora {
+            0% { transform: rotate(0deg) scale(1); }
+            100% { transform: rotate(360deg) scale(1.2); }
+        }
+        
+        .hero-bg {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)), url('https://flixmobi.com/storage/blog/motorista-flixmobi-blog-06.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, #A0A0A0, #FFFFFF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .cta-button {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.15), 0 0 20px rgba(255, 255, 255, 0.05);
+        }
+        
+        .feature-card {
+            background-color: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.6);
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3), 0 0 40px rgba(255, 255, 255, 0.1);
+        }
+        
+        .tab-button {
+            transition: all 0.2s ease-in-out;
+        }
+        
+        .tab-button.active {
+            background-color: #FFFFFF;
+            color: #0A0A0A;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+        }
+        
+        .shine-effect::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -150%;
+            width: 75%;
+            height: 100%;
+            background: linear-gradient(120deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0) 100%);
+            transform: skewX(-25deg);
+            transition: left 0.9s ease-in-out;
+        }
+        
+        .shine-effect:hover::before {
+            left: 150%;
+        }
+        
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            will-change: opacity, transform;
+        }
+        
+        .animate-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        header nav a {
+            position: relative;
+            padding-bottom: 4px;
+        }
+        
+        header nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            display: block;
+            bottom: 0;
+            right: 0;
+            background: #fff;
+            transition: width .3s ease;
+        }
+        
+        header nav a:hover::after {
+            width: 100%;
+            left: 0;
+        }
+        
+        .roadmap-line {
+            position: absolute;
+            left: 20px;
+            top: 40px;
+            bottom: -20px;
+            width: 2px;
+            background-color: #374151;
+        }
+        
+        .roadmap-item:last-child .roadmap-line {
+            display: none;
+        }
+        
+        .roadmap-icon {
+            position: absolute;
+            left: 0;
+            top: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            border-radius: 9999px;
+            background-color: #1f2937;
+            z-index: 10;
+            transform: translateX(0);
+        }
+        
+        @media (max-width: 768px) {
+            .hero-bg h2 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-bg p {
+                font-size: 1rem;
+            }
+            
+            .feature-card {
+                padding: 1.5rem;
+            }
+            
+            .roadmap-item {
+                padding-left: 4rem;
+            }
+            
+            .roadmap-icon {
+                width: 36px;
+                height: 36px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-black bg-opacity-50 backdrop-blur-lg">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <!-- Logo -->
+            <svg viewBox="0 0 230 50" class="h-9 w-auto" aria-label="Urban Logo">
+              <defs>
+                <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" style="stop-color:#A0A0A0;stop-opacity:1" />
+                  <stop offset="100%" style="stop-color:#FFFFFF;stop-opacity:1" />
+                </linearGradient>
+              </defs>
+              <text x="0" y="45" font-family="Inter, sans-serif" font-size="50" font-weight="900" fill="url(#logoGradient)">U</text>
+              <text x="55" y="42" font-family="Inter, sans-serif" font-size="40" font-weight="700" fill="url(#logoGradient)">Urban</text>
+            </svg>
+            
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden text-white">
+                <i data-lucide="menu" class="h-6 w-6"></i>
+            </button>
+            
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="#passageiros" class="text-gray-300 hover:text-white transition">Para Passageiros</a>
+                <a href="#motoristas" class="text-gray-300 hover:text-white transition">Para Motoristas</a>
+                <a href="#atuacao" class="text-gray-300 hover:text-white transition">Expansão</a>
+                <a href="#contato" class="text-gray-300 hover:text-white transition">Contato</a>
+            </nav>
+            
+            <a href="#download" class="hidden md:inline-block bg-white text-black font-bold py-2 px-6 rounded-lg cta-button shine-effect">Baixe o App</a>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-black bg-opacity-90 backdrop-blur-lg absolute top-full left-0 right-0 py-4 px-6">
+            <div class="flex flex-col space-y-4">
+                <a href="#passageiros" class="text-gray-300 hover:text-white transition py-2">Para Passageiros</a>
+                <a href="#motoristas" class="text-gray-300 hover:text-white transition py-2">Para Motoristas</a>
+                <a href="#atuacao" class="text-gray-300 hover:text-white transition py-2">Expansão</a>
+                <a href="#contato" class="text-gray-300 hover:text-white transition py-2">Contato</a>
+                <a href="#download" class="bg-white text-black font-bold py-3 px-6 rounded-lg cta-button shine-effect text-center">Baixe o App</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <main class="hero-bg pt-20">
+        <div class="container mx-auto px-6 h-screen flex flex-col justify-center items-center text-center">
+            <h2 class="text-4xl md:text-7xl font-black tracking-tighter text-white leading-tight mb-4 animate-on-scroll">
+                A revolução da <span class="gradient-text">mobilidade</span> na sua cidade.
+            </h2>
+            <p class="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mb-8 animate-on-scroll" style="transition-delay: 100ms;">
+                Uma experiência justa, segura e flexível para passageiros e motoristas. Conectando pessoas, construindo o futuro.
+            </p>
+            <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 animate-on-scroll" style="transition-delay: 200ms;">
+                <a href="#passageiros" class="bg-white text-black font-bold py-4 px-8 rounded-lg cta-button shine-effect flex items-center justify-center space-x-2">
+                    <i data-lucide="user"></i>
+                    <span>Viajar Agora</span>
+                </a>
+                <a href="#motoristas" class="bg-transparent text-white font-bold py-4 px-8 rounded-lg cta-button shine-effect flex items-center justify-center space-x-2 border-2 border-white hover:bg-white hover:text-black">
+                    <i data-lucide="steering-wheel"></i>
+                    <span>Quero Dirigir</span>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- About Section -->
+    <section id="sobre" class="py-20 bg-black">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12 animate-on-scroll">
+                <h3 class="text-4xl font-bold mb-2">Construindo um ecossistema <span class="gradient-text">justo</span></h3>
+                <p class="text-gray-400 max-w-3xl mx-auto">Nosso propósito é transformar a mobilidade urbana com um modelo de negócio centrado no respeito, sustentabilidade e inovação, beneficiando a todos no ecossistema.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="text-center p-6 animate-on-scroll" style="transition-delay: 100ms;">
+                    <div class="flex justify-center mb-4">
+                        <div class="bg-gray-900 border border-gray-700 p-4 rounded-full">
+                            <i data-lucide="shield-check" class="text-white h-8 w-8"></i>
+                        </div>
+                    </div>
+                    <h4 class="text-xl font-bold mb-2">Segurança em Primeiro Lugar</h4>
+                    <p class="text-gray-400">Com motoristas verificados, sistemas inteligentes e suporte dedicado, garantimos a tranquilidade de todos em cada viagem.</p>
+                </div>
+                <div class="text-center p-6 animate-on-scroll" style="transition-delay: 200ms;">
+                    <div class="flex justify-center mb-4">
+                        <div class="bg-gray-900 border border-gray-700 p-4 rounded-full">
+                            <i data-lucide="coins" class="text-white h-8 w-8"></i>
+                        </div>
+                    </div>
+                    <h4 class="text-xl font-bold mb-2">Economia Inteligente</h4>
+                    <p class="text-gray-400">Nossos modelos flexíveis oferecem mais controle financeiro e preços justos, seja para quem dirige ou para quem viaja.</p>
+                </div>
+                <div class="text-center p-6 animate-on-scroll" style="transition-delay: 300ms;">
+                    <div class="flex justify-center mb-4">
+                        <div class="bg-gray-900 border border-gray-700 p-4 rounded-full">
+                            <i data-lucide="rocket" class="text-white h-8 w-8"></i>
+                        </div>
+                    </div>
+                    <h4 class="text-xl font-bold mb-2">Inovação e Liberdade</h4>
+                    <p class="text-gray-400">Respeitamos a autonomia dos nossos parceiros e inovamos com soluções que realmente fazem a diferença no dia a dia.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Passengers Section -->
+    <section id="passageiros" class="py-20">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12 animate-on-scroll">
+                <h3 class="text-4xl font-bold mb-2">Viaje com tranquilidade e <span class="gradient-text">do seu jeito</span></h3>
+                <p class="text-gray-400 max-w-2xl mx-auto">Oferecemos opções para cada necessidade, sempre com foco na sua segurança e conveniência.</p>
+            </div>
+            
+            <div class="max-w-4xl mx-auto animate-on-scroll">
+                <div class="mb-8 max-w-2xl mx-auto flex justify-left space-x-2 md:space-x-4 p-2 bg-gray-900 rounded-lg">
+                    <button class="tab-button active flex-1 py-3 px-4 rounded-md font-semibold" onclick="showTab('popular')">Popular</button>
+                    <button class="tab-button flex-1 py-3 px-4 rounded-md font-semibold text-gray-300 hover:bg-gray-800" onclick="showTab('oferta')">Ofereça seu Preço</button>
+                </div>
+                
+                <div id="popular" class="tab-content">
+                    <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div class="w-full">
+                            <h4 class="text-3xl font-bold mb-4">Popular: Rápido e Acessível</h4>
+                            <p class="text-gray-400 mb-6">A escolha ideal para quem busca um transporte rápido, seguro e com preço fixo. Perfeito para o dia a dia, sem complicações e com a qualidade Urban que você confia. Todos os motoristas parceiros passam por verificações rigorosas para sua tranquilidade.</p>
+                            <ul class="space-y-3">
+                                <li class="flex items-center"><i data-lucide="check-circle" class="h-5 w-5 text-white mr-3"></i>Preços fixos e sem surpresas</li>
+                                <li class="flex items-center"><i data-lucide="check-circle" class="h-5 w-5 text-white mr-3"></i>Motoristas próximos para um atendimento ágil</li>
+                                <li class="flex items-center"><i data-lucide="check-circle" class="h-5 w-5 text-white mr-3"></i>Segurança e confiança em todas as corridas</li>
+                            </ul>
+                        </div>
+                        <div class="flex justify-center">
+                            <img src="https://i.imgur.com/6K9PeF8.png" alt="Celular com app Urban" class="h-96 w-auto object-contain">
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="oferta" class="tab-content hidden">
+                    <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div class="w-full">
+                            <h4 class="text-3xl font-bold mb-4">Ofereça seu Preço: Você no Controle</h4>
+                            <p class="text-gray-400 mb-6">Uma categoria exclusiva onde você sugere o valor que deseja pagar. Os motoristas parceiros avaliam sua oferta, garantindo mais flexibilidade e economia para sua viagem. Ideal para corridas em horários de baixa demanda.</p>
+                            
+                            <ul class="space-y-3">
+                                <li class="flex items-center"><i data-lucide="check-circle" class="h-5 w-5 text-white mr-3"></i>Flexibilidade total para o seu bolso</li>
+                                <li class="flex items-center"><i data-lucide="check-circle" class="h-5 w-5 text-white mr-3"></i>Negocie um valor justo para ambos os lados</li>
+                                <li class="flex items-center"><i data-lucide="check-circle" class="h-5 w-5 text-white mr-3"></i>Perfeito para viagens não urgentes e mais econômicas</li>
+                            </ul>
+                        </div>
+                        <div class="flex justify-center">
+                            <img src="https://i.imgur.com/6K9PeF8.png" alt="Celular com app Urban" class="h-96 w-auto object-contain">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12 animate-on-scroll">
+                <h4 class="text-xl font-bold mb-4">Baixe o app do passageiro</h4>
+                
+                <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4">
+                     <a href="https://apps.apple.com/br/app/urban/id1515298182" target="_blank" class="bg-gray-800 text-white font-bold py-3 px-6 rounded-lg flex items-center justify-center space-x-3 hover:bg-gray-700 transition w-60 cta-button">
+                        <i data-lucide="apple" class="h-7 w-7"></i>
+                        <div>
+                            <p class="text-xs">Baixar na</p>
+                            <p class="text-lg font-semibold">Apple Store</p>
+                        </div>
+                    </a>
+                    <a href="https://play.google.com/store/apps/details?id=production.urban.customer" target="_blank" class="bg-gray-800 text-white font-bold py-3 px-6 rounded-lg flex items-center justify-center space-x-3 hover:bg-gray-700 transition w-60 cta-button">
+                        <i data-lucide="smartphone" class="h-7 w-7"></i>
+                         <div>
+                            <p class="text-xs">Disponível no</p>
+                            <p class="text-lg font-semibold">Google Play</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Drivers Section -->
+    <section id="motoristas" class="py-20 bg-black">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12 animate-on-scroll">
+                <h3 class="text-4xl font-bold mb-2">Vantagens para <span class="gradient-text">você</span>, motorista</h3>
+                <p class="text-gray-400 max-w-2xl mx-auto">Criamos um ambiente de trabalho que valoriza sua autonomia, respeita seu investimento e garante sua segurança financeira.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="feature-card rounded-lg p-8 shine-effect animate-on-scroll" style="transition-delay: 100ms;">
+                    <i data-lucide="credit-card" class="h-10 w-10 text-white mb-4"></i>
+                    <h4 class="text-2xl font-bold mb-3">Sistema de Créditos</h4>
+                    <p class="text-gray-400">Pague apenas pelas corridas que realiza. Nosso sistema pré-pago é justo, flexível e sem taxas escondidas. Seus créditos não expiram e você tem total controle sobre seus gastos.</p>
+                </div>
+                <div class="feature-card rounded-lg p-8 shine-effect animate-on-scroll" style="transition-delay: 200ms;">
+                    <i data-lucide="shield-plus" class="h-10 w-10 text-white mb-4"></i>
+                    <h4 class="text-2xl font-bold mb-3">Proteção e Suporte</h4>
+                    <p class="text-gray-400">Se um passageiro não pagar, a Urban reembolsa o valor em créditos para que você nunca saia no prejuízo. Conte também com nosso suporte "Estamos Juntos, Motorista" para imprevistos.</p>
+                </div>
+                <div class="feature-card rounded-lg p-8 shine-effect animate-on-scroll" style="transition-delay: 300ms;">
+                    <i data-lucide="car" class="h-10 w-10 text-white mb-4"></i>
+                    <h4 class="text-2xl font-bold mb-3">Seu Carro, Suas Regras</h4>
+                    <p class="text-gray-400">Respeitamos a autonomia. Não exigimos o uso de adesivos permanentes no seu veículo, garantindo sua privacidade e a liberdade para trabalhar em outras plataformas sem restrições.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Expansion Section -->
+    <section id="atuacao" class="py-20">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 animate-on-scroll">
+                <h3 class="text-4xl font-bold mb-2">Nosso caminho até <span class="gradient-text">você</span></h3>
+                <p class="text-gray-400 max-w-2xl mx-auto">Estamos em constante expansão para levar a mobilidade justa e inteligente para mais pessoas. Confira nosso roadmap!</p>
+            </div>
+            
+            <div class="max-w-3xl mx-auto">
+                <!-- Roadmap Item -->
+                <div class="relative pl-20 pb-12 roadmap-item animate-on-scroll">
+                    <div class="roadmap-line"></div>
+                    <div class="roadmap-icon">
+                        <i data-lucide="flag" class="text-white"></i>
+                    </div>
+                    <p class="text-sm font-semibold text-gray-400">OPERAÇÃO ATUAL</p>
+                    <h4 class="text-xl font-bold mt-1">Cidades Ativas</h4>
+                    <p class="text-gray-300 mt-2">Guarantã do Norte, Matupá, Peixoto de Azevedo.</p>
+                </div>
+                
+                <!-- Roadmap Item -->
+                <div class="relative pl-20 pb-12 roadmap-item animate-on-scroll">
+                    <div class="roadmap-line"></div>
+                    <div class="roadmap-icon">
+                        <i data-lucide="map-pin" class="text-white"></i>
+                    </div>
+                    <p class="text-sm font-semibold text-gray-400">FASE 1 - EXPANSÃO</p>
+                    <h4 class="text-xl font-bold mt-1">Nova Monte Verde & Bandeirantes</h4>
+                    <p class="text-gray-300 mt-2 font-semibold">Inauguração: <span class="text-white">30 de Julho, 2025</span></p>
+                </div>
+                
+                <!-- Roadmap Item -->
+                <div class="relative pl-20 pb-12 roadmap-item animate-on-scroll">
+                     <div class="roadmap-line"></div>
+                    <div class="roadmap-icon">
+                        <i data-lucide="map-pin" class="text-white"></i>
+                    </div>
+                    <p class="text-sm font-semibold text-gray-400">FASE 2 - EXPANSÃO</p>
+                    <h4 class="text-xl font-bold mt-1">Alta Floresta & Paranaíta</h4>
+                    <p class="text-gray-300 mt-2 font-semibold">Inauguração: <span class="text-white">13 de Setembro, 2025</span></p>
+                </div>
+                
+                <!-- Roadmap Item -->
+                <div class="relative pl-20 pb-12 roadmap-item animate-on-scroll">
+                     <div class="roadmap-line"></div>
+                    <div class="roadmap-icon">
+                        <i data-lucide="map-pin" class="text-white"></i>
+                    </div>
+                    <p class="text-sm font-semibold text-gray-400">FASE 3 - EXPANSÃO</p>
+                    <h4 class="text-xl font-bold mt-1">Colíder, Nova Canaã do Norte & Carlinda</h4>
+                    <p class="text-gray-300 mt-2 font-semibold">Inauguração: <span class="text-white">29 de Outubro, 2025</span></p>
+                </div>
+                
+                <!-- Roadmap Item -->
+                <div class="relative pl-20 pb-12 roadmap-item animate-on-scroll">
+                    <div class="roadmap-icon">
+                        <i data-lucide="globe" class="text-white"></i>
+                    </div>
+                    <p class="text-sm font-semibold text-gray-400">FUTURO</p>
+                    <h4 class="text-xl font-bold mt-1">Próximos Passos</h4>
+                    <p class="text-gray-300 mt-2 font-semibold">Novas cidades e estados em breve. Fique atento!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section id="download" class="py-20 bg-black">
+        <div class="container mx-auto px-6 text-center">
+            <h3 class="text-4xl font-extrabold mb-4 gradient-text animate-on-scroll">Pronto para começar?</h3>
+            <p class="max-w-2xl mx-auto mb-8 text-lg text-gray-300 animate-on-scroll" style="transition-delay: 100ms;">
+                Baixe o aplicativo Urban e faça parte da revolução da mobilidade. Seja como passageiro ou motorista, sua jornada começa aqui.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4 animate-on-scroll" style="transition-delay: 200ms;">
+                 <a href="https://apps.apple.com/br/app/urban/id1515298182" target="_blank" class="bg-white text-black font-bold py-3 px-6 rounded-lg flex items-center justify-center space-x-3 hover:bg-gray-200 transition w-60 cta-button shine-effect">
+                    <i data-lucide="apple" class="h-7 w-7"></i>
+                    <div>
+                        <p class="text-xs">Baixar na</p>
+                        <p class="text-lg font-semibold">Apple Store</p>
+                    </div>
+                </a>
+                <a href="https://play.google.com/store/apps/details?id=production.urban.customer" target="_blank" class="bg-white text-black font-bold py-3 px-6 rounded-lg flex items-center justify-center space-x-3 hover:bg-gray-200 transition w-60 cta-button shine-effect">
+                    <i data-lucide="smartphone" class="h-7 w-7"></i>
+                     <div>
+                        <p class="text-xs">Disponível no</p>
+                        <p class="text-lg font-semibold">Google Play</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contato" class="bg-black border-t border-gray-900 py-12">
+        <div class="container mx-auto px-6 text-center text-gray-400">
+            <!-- Logo -->
+            <svg viewBox="0 0 230 50" class="h-8 w-auto mx-auto mb-4" aria-label="Urban Logo">
+              <text x="0" y="45" font-family="Inter, sans-serif" font-size="50" font-weight="900" fill="url(#logoGradient)">U</text>
+              <text x="55" y="42" font-family="Inter, sans-serif" font-size="40" font-weight="700" fill="url(#logoGradient)">Urban</text>
+            </svg>
+            
+            <p class="mb-6">Transformando a mobilidade urbana com inovação, sustentabilidade e respeito.</p>
+            
+            <div class="flex justify-center space-x-6 mb-8">
+                <a href="#" class="text-gray-400 hover:text-white transition"><i data-lucide="facebook" class="h-6 w-6"></i></a>
+                <a href="#" class="text-gray-400 hover:text-white transition"><i data-lucide="instagram" class="h-6 w-6"></i></a>
+                <a href="#" class="text-gray-400 hover:text-white transition"><i data-lucide="twitter" class="h-6 w-6"></i></a>
+                <a href="#" class="text-gray-400 hover:text-white transition"><i data-lucide="linkedin" class="h-6 w-6"></i></a>
+            </div>
+            
+            <p>&copy; 2024 Urban Mobilidade. Todos os direitos reservados.</p>
+            <p class="text-sm mt-2">Suporte via WhatsApp: <a href="https://wa.me/SEUNUMERO" class="text-white hover:underline">Fale Conosco</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+        
+        // Tab functionality
+        function showTab(tabName) {
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => {
+                tab.classList.add('hidden');
+            });
+            document.getElementById(tabName).classList.remove('hidden');
+            
+            const buttons = document.querySelectorAll('.tab-button');
+            buttons.forEach(button => {
+                button.classList.remove('active');
+                button.classList.add('text-gray-300', 'hover:bg-gray-800');
+            });
+            
+            const activeButton = document.querySelector(`.tab-button[onclick="showTab('${tabName}')"]`);
+            activeButton.classList.add('active');
+            activeButton.classList.remove('text-gray-300', 'hover:bg-gray-800');
+        }
+        
+        // Scroll animation logic
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+        
+        const elementsToAnimate = document.querySelectorAll('.animate-on-scroll');
+        elementsToAnimate.forEach(el => observer.observe(el));
+        
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            const icon = mobileMenuButton.querySelector('i');
+            if (mobileMenu.classList.contains('hidden')) {
+                icon.setAttribute('data-lucide', 'menu');
+            } else {
+                icon.setAttribute('data-lucide', 'x');
+            }
+            lucide.createIcons();
+        });
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                const icon = mobileMenuButton.querySelector('i');
+                icon.setAttribute('data-lucide', 'menu');
+                lucide.createIcons();
+            });
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Hero animation on load
+        window.addEventListener('load', () => {
+            document.querySelector('.hero-bg h2').classList.add('is-visible');
+            document.querySelector('.hero-bg p').classList.add('is-visible');
+            document.querySelector('.hero-bg .flex').classList.add('is-visible');
+        });
+    </script>
+<p style="border-radius: 8px; text-align: center; font-size: 12px; color: #fff; margin-top: 16px;position: fixed; left: 8px; bottom: 8px; z-index: 10; background: rgba(0, 0, 0, 0.8); padding: 4px 8px;">Made with <img src="https://enzostvs-deepsite.hf.space/logo.svg" alt="DeepSite Logo" style="width: 16px; height: 16px; vertical-align: middle;display:inline-block;margin-right:3px;filter:brightness(0) invert(1);"><a href="https://enzostvs-deepsite.hf.space" style="color: #fff;text-decoration: underline;" target="_blank" >DeepSite</a> - 🧬 <a href="https://enzostvs-deepsite.hf.space?remix=Urban123/www-urbanmt-com-br" style="color: #fff;text-decoration: underline;" target="_blank" >Remix</a></p></body>
 </html>
