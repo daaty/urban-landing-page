@@ -2,6 +2,16 @@
 
 Uma landing page moderna e responsiva para a Urban - plataforma de mobilidade urbana inovadora.
 
+## 🚀 Deploy Status
+
+[![Deploy](https://img.shields.io/badge/deploy-ready-green.svg)](https://github.com/usuario/urban-landing-page)
+[![Node.js](https://img.shields.io/badge/node.js-18.x-green.svg)](https://nodejs.org/)
+[![Express](https://img.shields.io/badge/express-4.x-blue.svg)](https://expressjs.com/)
+
+## 🌐 Demo
+
+🔗 **[Ver Demo ao Vivo](https://urban-landing.seu-dominio.com)**
+
 ## 🚀 Tecnologias
 
 - **Frontend:** HTML5, CSS3, JavaScript (Vanilla)
