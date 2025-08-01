@@ -4,8 +4,8 @@
   "description": "Urban Mobility Landing Page",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "dev": "nodemon server.js"
+    "start": "node server-simple.js",
+    "dev": "nodemon server-simple.js"
   },
   "keywords": ["urban", "mobility", "landing-page"],
   "author": "Urban Team",
