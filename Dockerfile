@@ -21,7 +21,7 @@ RUN chown -R nodejs:nodejs /app
 USER nodejs
 
 # Expor porta
-EXPOSE 3080
+EXPOSE 80
 
 # Comando para iniciar a aplicação
 CMD ["npm", "start"]

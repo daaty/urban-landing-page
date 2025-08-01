@@ -4,7 +4,7 @@ const compression = require('compression');
 const helmet = require('helmet');
 
 const app = express();
-const PORT = process.env.PORT || 3080;
+const PORT = process.env.PORT || 80;
 
 // Middleware de segurança
 app.use(helmet({
