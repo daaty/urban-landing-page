@@ -221,10 +221,11 @@
             <div class="flex justify-center -mb-px"> <!-- -mb-px para sobrepor a borda do conteúdo -->
                 <button id="tabPassageiro" class="tab-button flex-1 text-center" onclick="openTab('passageiro')">Passageiro</button>
                 <button id="tabMotorista" class="tab-button flex-1 text-center" onclick="openTab('motorista')">Motoristas</button>
-                <button id="tabSuporte" class="tab-button active flex-1 text-center" onclick="openTab('suporte')">Suporte</button>
+                <button id="tabSuporte" class="tab-button flex-1 text-center" onclick="openTab('suporte')">Suporte</button>
             </div>
             <!-- Conteúdo das Abas -->
             <div id="suporteContent" class="tab-content active space-y-3">
+            <!-- A classe 'active' deve ser movida para passageiroContent -->
                 <!-- Link: Suporte WhatsApp -->
                 <a href="https://wa.me/556696071862" target="_blank" rel="noopener noreferrer"
                    class="link-card flex items-center justify-between animate-in delay-4">
@@ -449,9 +450,9 @@
                 delay++;
             });
         }
-        // Garante que a primeira aba (Suporte) esteja ativa ao carregar a página
+        // Garante que a primeira aba (Passageiro) esteja ativa ao carregar a página
         document.addEventListener('DOMContentLoaded', () => {
-            openTab('suporte');
+            openTab('passageiro');
         });
     </script>
 </body>
