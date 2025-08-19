@@ -1,0 +1,460 @@
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UrbanMT - Links Essenciais</title>
+    <!-- Carrega o Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Configuração do Tailwind para cores e fontes -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        inter: ['Inter', 'sans-serif'], // Define a fonte Inter
+                    },
+                    colors: {
+                        // Cores baseadas na imagem (tons de cinza escuro)
+                        darkPrimary: '#1A1A1A', // Fundo principal mais escuro
+                        darkSecondary: 'rgba(40, 40, 40, 0.7)', // Fundo dos cartões de link e abas (transparente)
+                        darkTertiary: 'rgba(51, 51, 51, 0.7)', // Fundo do conteúdo da aba (transparente)
+                        darkText: '#E0E0E0', // Cor do texto principal claro
+                        darkLightText: '#A0A0A0', // Cor do texto secundário/descrições
+                        darkAccent: 'rgba(40, 40, 40, 0.7)', // Cor do bloco do logo/slogan (transparente)
+                        borderColor: 'rgba(58, 58, 58, 0.6)', // Cor da borda com transparência
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Link para a fonte Inter do Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos personalizados para o corpo e elementos */
+        body {
+            background-color: #1A1A1A; /* Fundo mais escuro para o corpo */
+            color: #E0E0E0; /* Cor do texto padrão */
+            overflow-x: hidden; /* Evita rolagem horizontal devido a animações */
+            /* Adiciona um gradiente sutil ao fundo do body para destacar o glassmorphism */
+            background: linear-gradient(-45deg, #1A1A1A, #0A0A0A, #1A1A1A, #0A0A0A);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite; /* Animação do gradiente */
+            background-attachment: fixed; /* Mantém o gradiente fixo ao rolar */
+        }
+        /* Animação do gradiente de fundo */
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        /* Sombra de texto sutil para títulos */
+        h1, h2 {
+            text-shadow: 0px 0px 8px rgba(0, 0, 0, 0.7); /* Sombra mais escura para profundidade */
+        }
+        /* Estilo para o bloco do logo/slogan */
+        .logo-block {
+            background-color: rgba(40, 40, 40, 0.7); /* Fundo semi-transparente */
+            backdrop-filter: blur(10px); /* Efeito de vidro fosco */
+            -webkit-backdrop-filter: blur(10px); /* Suporte para navegadores Webkit */
+            border-radius: 1rem; /* Cantos arredondados */
+            padding: 1.25rem 1.5rem; /* Preenchimento reduzido */
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.6); /* Sombra mais pronunciada e escura */
+            border: 1px solid rgba(58, 58, 58, 0.6); /* Borda sutil transparente */
+            transition: all 0.3s ease-in-out; /* Transição para hover */
+            display: flex; /* Para centralizar a imagem e o texto */
+            flex-direction: column; /* Organiza em coluna */
+            align-items: center; /* Centraliza horizontalmente */
+            justify-content: center; /* Centraliza verticalmente */
+        }
+        .logo-block:hover {
+            box-shadow: 0 6px 40px rgba(0, 0, 0, 0.7), 0 0 15px rgba(224, 224, 224, 0.2); /* Sombra maior e leve brilho */
+        }
+        /* Estilo para o SVG da logo */
+        .logo-svg {
+            width: 150px; /* Largura reduzida do SVG */
+            height: auto; /* Altura automática para manter proporção */
+            margin-bottom: 0.25rem; /* Espaço reduzido entre a logo e o slogan */
+            display: block; /* Garante que o SVG se comporte como um bloco */
+        }
+        .logo-svg .u-text {
+            fill: white; /* Cor do 'U' */
+            font-family: 'Inter', sans-serif; /* Garante a fonte, caso não seja padrão */
+            font-weight: 800; /* Extra bold */
+            font-size: 50px; /* Tamanho reduzido */
+        }
+        .logo-svg .urban-text {
+            fill: white; /* Cor do 'Urban' */
+            font-family: 'Inter', sans-serif; /* Garante a fonte, caso não seja padrão */
+            font-weight: 600; /* Semi bold */
+            font-size: 30px; /* Tamanho reduzido */
+        }
+        /* Estilo para os cartões de link */
+        .link-card {
+            background-color: rgba(40, 40, 40, 0.7); /* Fundo semi-transparente */
+            backdrop-filter: blur(8px); /* Efeito de vidro fosco */
+            -webkit-backdrop-filter: blur(8px); /* Suporte para navegadores Webkit */
+            border-radius: 0.5rem; /* Cantos arredondados reduzidos */
+            padding: 0.75rem 1.25rem; /* Preenchimento reduzido */
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.5); /* Sombra mais pronunciada */
+            transition: all 0.3s ease-in-out; /* Transição suave para hover e click */
+            border: 1px solid rgba(58, 58, 58, 0.6); /* Borda sutil transparente */
+        }
+        .link-card:hover {
+            background-color: rgba(51, 51, 51, 0.85); /* Fundo mais claro e um pouco mais opaco no hover */
+            transform: translateY(-6px); /* Efeito de "levantar" reduzido */
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.7), 0 0 10px rgba(224, 224, 224, 0.15); /* Sombra maior e leve brilho */
+        }
+        .link-card:active {
+            transform: translateY(-2px); /* Pequeno "afundamento" ao clicar */
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.5);
+        }
+        /* Ajuste para o ícone da Play Store, para que o triângulo fique visível em fundo escuro */
+        .playstore-icon path {
+            fill: #E0E0E0; /* Ajusta a cor do triângulo para ser visível no fundo escuro */
+        }
+        .appstore-icon path {
+             fill: #E0E0E0; /* Ajusta a cor da maçã para ser visível no fundo escuro */
+        }
+        /* Estilos das abas */
+        .tab-button {
+            padding: 0.6rem 1.25rem;
+            border-radius: 0.5rem 0.5rem 0 0;
+            background-color: rgba(40, 40, 40, 0.7); /* Fundo semi-transparente */
+            backdrop-filter: blur(8px); /* Efeito de vidro fosco */
+            -webkit-backdrop-filter: blur(8px); /* Suporte para navegadores Webkit */
+            color: #A0A0A0;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.2s ease-in-out;
+            cursor: pointer;
+            border: 1px solid rgba(58, 58, 58, 0.6); /* Borda sutil transparente */
+            border-bottom: none; /* Remove a borda inferior para parecer "colado" no conteúdo */
+            position: relative;
+            top: 1px; /* Overlap com a borda do container de conteúdo */
+        }
+        .tab-button:hover:not(.active) {
+            background-color: rgba(45, 45, 45, 0.8); /* Fundo mais claro e opaco no hover */
+            color: #C0C0C0;
+        }
+        .tab-button.active {
+            background-color: rgba(51, 51, 51, 0.85); /* Cor mais clara e opaca para aba ativa */
+            color: #E0E0E0;
+            box-shadow: 0 -2px 15px rgba(0, 0, 0, 0.5); /* Sombra para destacar */
+            border-color: rgba(58, 58, 58, 0.6);
+            border-bottom-color: rgba(51, 51, 51, 0.85); /* Mesma cor de fundo para a borda inferior da aba ativa */
+        }
+        .tab-content {
+            background-color: rgba(51, 51, 51, 0.7); /* Fundo do conteúdo da aba semi-transparente */
+            backdrop-filter: blur(8px); /* Efeito de vidro fosco */
+            -webkit-backdrop-filter: blur(8px); /* Suporte para navegadores Webkit */
+            border-radius: 0 0.5rem 0.5rem 0.5rem; /* Cantos arredondados reduzidos */
+            padding: 1.25rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.55); /* Sombra mais pronunciada */
+            display: none; /* Esconde por padrão */
+            border: 1px solid rgba(58, 58, 58, 0.6); /* Borda transparente */
+            /* Animação de transição para o conteúdo da aba */
+            opacity: 0;
+            transform: translateY(10px); /* Início mais baixo para o slide-up */
+            transition: opacity 0.4s ease-out, transform 0.4s ease-out; /* Transição mais longa */
+        }
+        .tab-content.active {
+            display: block; /* Mostra a aba ativa */
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Animação de entrada para os elementos principais */
+        @keyframes fadeInSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px); /* Começa mais abaixo */
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .animate-in {
+            animation: fadeInSlideUp 0.6s ease-out forwards; /* Animação mais longa */
+            opacity: 0; /* Garante que o elemento esteja invisível antes da animação */
+        }
+        .animate-in.delay-1 { animation-delay: 0.1s; }
+        .animate-in.delay-2 { animation-delay: 0.15s; }
+        .animate-in.delay-3 { animation-delay: 0.2s; }
+        .animate-in.delay-4 { animation-delay: 0.25s; }
+        .animate-in.delay-5 { animation-delay: 0.3s; }
+        .animate-in.delay-6 { animation-delay: 0.35s; }
+        .animate-in.delay-7 { animation-delay: 0.4s; }
+    </style>
+</head>
+<body class="font-inter antialiased flex flex-col items-center justify-start min-h-screen pt-8 pb-6 px-4 bg-[#1A1A1A] text-darkText">
+    <div class="w-full max-w-lg flex flex-col items-center">
+        <!-- Bloco do Logo e Slogan (UrbanMT) -->
+        <header class="logo-block w-full text-center mb-6 animate-in">
+            <!-- Logo UrbanMT em SVG -->
+            <svg class="logo-svg" viewBox="0 0 200 100" preserveAspectRatio="xMidYMid meet">
+                <text x="50%" y="40" text-anchor="middle" font-size="60" class="u-text">U</text>
+                <text x="50%" y="85" text-anchor="middle" font-size="35" class="urban-text">Urban</text>
+            </svg>
+            <p class="text-xs font-medium text-darkLightText tracking-widest uppercase">
+                MOBILIDADE • TECNOLOGIA • INOVAÇÃO
+            </p>
+        </header>
+        <!-- Título Principal e Descrição -->
+        <section class="text-center mb-6 animate-in delay-1">
+            <h2 class="text-xl md:text-2xl font-extrabold text-white leading-tight mb-2">
+                Transporte Urbano <br> Inteligente
+            </h2>
+            <p class="text-sm md:text-base text-darkLightText max-w-md mx-auto">
+                Conectando motoristas e passageiros através da tecnologia. Baixe nossos aplicativos.
+            </p>
+        </section>
+        <!-- Seção de Informações da Empresa -->
+        <section class="w-full max-w-md mb-8 animate-in delay-2">
+            <p class="text-sm md:text-base font-semibold text-white text-center leading-relaxed">
+                Estamos no mercado há <span class="text-blue-400">10 anos</span>, atuando em mais de <span class="text-blue-400">300 cidades</span>.
+            </p>
+        </section>
+        <!-- Seção de Abas -->
+        <div class="w-full max-w-lg animate-in delay-3">
+            <!-- Botões das Abas -->
+            <div class="flex justify-center -mb-px"> <!-- -mb-px para sobrepor a borda do conteúdo -->
+                <button id="tabPassageiro" class="tab-button flex-1 text-center" onclick="openTab('passageiro')">Passageiro</button>
+                <button id="tabMotorista" class="tab-button flex-1 text-center" onclick="openTab('motorista')">Motoristas</button>
+                <button id="tabSuporte" class="tab-button active flex-1 text-center" onclick="openTab('suporte')">Suporte</button>
+            </div>
+            <!-- Conteúdo das Abas -->
+            <div id="suporteContent" class="tab-content active space-y-3">
+                <!-- Link: Suporte WhatsApp -->
+                <a href="https://wa.me/556696071862" target="_blank" rel="noopener noreferrer"
+                   class="link-card flex items-center justify-between animate-in delay-4">
+                    <div class="flex items-center">
+                        <!-- Ícone WhatsApp SVG (Novo) -->
+                        <svg class="h-6 w-6 mr-3" viewBox="0 0 48 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                            <g id="SVGRepo_iconCarrier">
+                                <title>Whatsapp-color</title>
+                                <desc>Created with Sketch.</desc>
+                                <defs> </defs>
+                                <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <g id="Color-" transform="translate(-700.000000, -360.000000)" fill="#67C15E">
+                                        <path d="M723.993033,360 C710.762252,360 700,370.765287 700,383.999801 C700,389.248451 701.692661,394.116025 704.570026,398.066947 L701.579605,406.983798 L710.804449,404.035539 C714.598605,406.546975 719.126434,408 724.006967,408 C737.237748,408 748,397.234315 748,384.000199 C748,370.765685 737.237748,360.000398 724.006967,360.000398 L723.993033,360.000398 L723.993033,360 Z M717.29285,372.190836 C716.827488,371.07628 716.474784,371.034071 715.769774,371.005401 C715.529728,370.991464 715.262214,370.977527 714.96564,370.977527 C714.04845,370.977527 713.089462,371.245514 712.511043,371.838033 C711.806033,372.557577 710.056843,374.23638 710.056843,377.679202 C710.056843,381.122023 712.567571,384.451756 712.905944,384.917648 C713.258648,385.382743 717.800808,392.55031 724.853297,395.471492 C730.368379,397.757149 732.00491,397.545307 733.260074,397.27732 C735.093658,396.882308 737.393002,395.527239 737.971421,393.891043 C738.54984,392.25405 738.54984,390.857171 738.380255,390.560912 C738.211068,390.264652 737.745308,390.095816 737.040298,389.742615 C736.335288,389.389811 732.90737,387.696673 732.25849,387.470894 C731.623543,387.231179 731.017259,387.315995 730.537963,387.99333 C729.860819,388.938653 729.198006,389.89831 728.661785,390.476494 C728.238619,390.928051 727.547144,390.984595 726.969123,390.744481 C726.193254,390.420348 724.021298,389.657798 721.340985,387.273388 C719.267356,385.42535 717.856938,383.125756 717.448104,382.434484 C717.038871,381.729275 717.405907,381.319529 717.729948,380.938852 C718.082653,380.501232 718.421026,380.191036 718.77373,379.781688 C719.126434,379.372738 719.323884,379.160897 719.549599,378.681068 C719.789645,378.215575 719.62006,377.735746 719.450874,377.382942 C719.281687,377.030139 717.871269,373.587317 717.29285,372.190836 Z" id="Whatsapp"> </path>
+                                    </g>
+                                </g>
+                            </g>
+                        </svg>
+                        <div>
+                            <p class="text-base font-semibold text-white">Suporte WhatsApp</p>
+                            <p class="text-xs text-darkLightText">Atendimento 24h</p>
+                        </div>
+                    </div>
+                    <!-- Ícone de seta para a direita -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-darkLightText" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                </a>
+                <!-- Link: Nosso Instagram -->
+                <a href="https://www.instagram.com/urbanpassageiromt/" target="_blank" rel="noopener noreferrer"
+                   class="link-card flex items-center justify-between animate-in delay-5">
+                    <div class="flex items-center">
+                        <!-- Ícone Instagram SVG -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"></path>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                        </svg>
+                        <div>
+                            <p class="text-base font-semibold text-white">Nosso Instagram</p>
+                            <p class="text-xs text-darkLightText">Siga nossas novidades</p>
+                        </div>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-darkLightText" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                </a>
+                <!-- Link: Site UrbanMT -->
+                <a href="https://urbanmt.com.br" target="_blank" rel="noopener noreferrer"
+                   class="link-card flex items-center justify-between animate-in delay-6">
+                    <div class="flex items-center">
+                        <!-- Ícone de Globo SVG -->
+                        <svg class="h-6 w-6 mr-3" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <circle cx="12" cy="12" r="4"></circle>
+                            <line x1="21.17" y1="8" x2="12" y2="8"></line>
+                            <line x1="3.95" y1="6.06" x2="8.54" y2="14"></line>
+                            <line x1="10.88" y1="21.94" x2="15.46" y2="14"></line>
+                        </svg>
+                        <div>
+                            <p class="text-base font-semibold text-white">Site UrbanMT</p>
+                            <p class="text-xs text-darkLightText">Visite nosso site</p>
+                        </div>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-darkLightText" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                </a>
+            </div>
+            <div id="passageiroContent" class="tab-content space-y-3">
+                <!-- Link: App Passageiro - Android -->
+                <a href="https://play.google.com/store/apps/details?id=production.urban.customer" target="_blank" rel="noopener noreferrer"
+                   class="link-card flex items-center justify-between animate-in delay-4">
+                    <div class="flex items-center">
+                        <!-- Ícone Google Play Store SVG com novo ícone -->
+                        <svg class="h-6 w-6 mr-3" height="200px" width="200px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 511.999 511.999" xml:space="preserve" fill="#000000">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                            <g id="SVGRepo_iconCarrier">
+                                <g>
+                                    <path style="fill:#32BBFF;" d="M382.369,175.623C322.891,142.356,227.427,88.937,79.355,6.028 C69.372-0.565,57.886-1.429,47.962,1.93l254.05,254.05L382.369,175.623z"></path>
+                                    <path style="fill:#32BBFF;" d="M47.962,1.93c-1.86,0.63-3.67,1.39-5.401,2.308C31.602,10.166,23.549,21.573,23.549,36v439.96 c0,14.427,8.052,25.834,19.012,31.761c1.728,0.917,3.537,1.68,5.395,2.314L302.012,255.98L47.962,1.93z"></path>
+                                    <path style="fill:#32BBFF;" d="M302.012,255.98L47.956,510.035c9.927,3.384,21.413,2.586,31.399-4.103 c143.598-80.41,237.986-133.196,298.152-166.746c1.675-0.941,3.316-1.861,4.938-2.772L302.012,255.98z"></path>
+                                </g>
+                                <path style="fill:#2C9FD9;" d="M23.549,255.98v219.98c0,14.427,8.052,25.834,19.012,31.761c1.728,0.917,3.537,1.68,5.395,2.314 L302.012,255.98H23.549z"></path>
+                                <path style="fill:#29CC5E;" d="M79.355,6.028C67.5-1.8,53.52-1.577,42.561,4.239l255.595,255.596l84.212-84.212 C322.891,142.356,227.427,88.937,79.355,6.028z"></path>
+                                <path style="fill:#D93F21;" d="M298.158,252.126L42.561,507.721c10.96,5.815,24.939,6.151,36.794-1.789 c143.598-80.41,237.986-133.196,298.152-166.746c1.675-0.941,3.316-1.861,4.938-2.772L298.158,252.126z"></path>
+                                <path style="fill:#FFD500;" d="M488.45,255.98c0-12.19-6.151-24.492-18.342-31.314c0,0-22.799-12.721-92.682-51.809l-83.123,83.123 l83.204,83.205c69.116-38.807,92.6-51.892,92.6-51.892C482.299,280.472,488.45,268.17,488.45,255.98z"></path>
+                                <path style="fill:#FFAA00;" d="M470.108,287.294c12.191-6.822,18.342-19.124,18.342-31.314H294.303l83.204,83.205 C446.624,300.379,470.108,287.294,470.108,287.294z"></path>
+                            </g>
+                        </svg>
+                        <div>
+                            <p class="text-base font-semibold text-white">App Passageiro</p>
+                            <p class="text-xs text-darkLightText">Google Play</p>
+                        </div>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-darkLightText" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                </a>
+                <!-- Link: App Passageiro - iOS -->
+                <a href="https://apps.apple.com/br/app/urban/id1515298182" target="_blank" rel="noopener noreferrer"
+                   class="link-card flex items-center justify-between animate-in delay-5">
+                    <div class="flex items-center">
+                        <!-- Ícone Apple App Store SVG com novo ícone -->
+                        <svg class="h-6 w-6 mr-3" viewBox="0 0 256 256" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" fill="#000000">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                            <g id="SVGRepo_iconCarrier">
+                                <defs>
+                                    <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-1">
+                                        <stop stop-color="#17C9FB" offset="0%"> </stop>
+                                        <stop stop-color="#1A74E8" offset="100%"> </stop>
+                                    </linearGradient>
+                                </defs>
+                                <g>
+                                    <path d="M56.0638473,0 L199.936153,0 C230.899361,-6.57084692e-15 256,25.1006394 256,56.0638473 L256,199.936153 C256,230.899361 230.899361,256 199.936153,256 L56.0638473,256 C25.1006394,256 0,230.899361 0,199.936153 L0,56.0638473 C0,25.1006394 25.1006394,6.57084692e-15 56.0638473,0 Z" fill="url(#linearGradient-1)"> </path>
+                                    <path d="M82.041678,185.810289 L82.0657467,185.817889 L73.3130924,200.977891 C70.1182861,206.51167 63.0418283,208.407779 57.5080489,205.212719 C51.9745229,202.018166 50.0784142,194.941709 53.2732205,189.407929 L59.7211046,178.240042 L60.3397975,177.16835 C61.4449319,175.579561 64.1720448,172.838767 69.6270308,173.353838 C69.6270308,173.353838 82.4637674,174.747037 83.3925667,181.418887 C83.3928201,181.418887 83.5194976,183.614461 82.041678,185.810289 L82.041678,185.810289 Z M206.18511,147.089287 L178.890925,147.089287 C177.032313,146.96489 176.22031,146.3011 175.901843,145.915241 L175.881574,145.880024 L146.663918,95.2738878 L146.626168,95.2992233 L144.873712,92.786702 C142.002187,88.3953002 137.442051,99.6272864 137.442051,99.6272864 C131.997452,112.142769 138.21453,126.372451 140.382488,130.673152 L180.963875,200.962183 C184.158428,206.495962 191.234886,208.392071 196.768665,205.197011 C202.302191,202.002458 204.1983,194.926001 201.003494,189.392221 L190.855613,171.815973 C190.659263,171.390337 190.316981,170.233771 192.398038,170.229211 L206.18511,170.229211 C212.574975,170.229211 217.755071,165.049115 217.755071,158.659249 C217.755071,152.269383 212.574975,147.089287 206.18511,147.089287 Z M153.171088,162.818324 C153.171088,162.818324 154.627879,170.228957 148.99073,170.228957 L143.353582,170.228957 L143.353582,170.229211 L48.0918579,170.229211 C41.701992,170.229211 36.5218962,165.049115 36.5218962,158.659249 C36.5218962,152.269383 41.701992,147.089287 48.0918579,147.089287 L74.0318604,147.089287 C78.2198182,146.846573 79.2127163,144.42906 79.2127163,144.42906 L79.2355183,144.440715 L113.095904,85.7925846 L113.08577,85.7905577 C113.703196,84.6575543 113.189139,83.5871295 113.099704,83.417635 L101.917376,64.0494072 C98.7223163,58.5156278 100.618425,51.4394233 106.152204,48.244617 C111.685984,45.0495574 118.761935,46.9456661 121.956994,52.4794455 L127.143171,61.4623995 L132.320226,52.4954068 C135.515033,46.9616274 142.591237,45.0655188 148.125016,48.2605784 C153.658796,51.455638 155.554904,58.5318425 152.359845,64.0653685 L105.242153,145.675313 C105.036176,146.172142 104.97309,146.951969 106.505888,147.089287 L134.670094,147.089287 L134.676174,147.363671 C134.676174,147.363671 150.954231,147.617026 153.171088,162.818324 Z" fill="#FFFFFF" fill-rule="nonzero"> </path>
+                                </g>
+                            </g>
+                        </svg>
+                        <div>
+                            <p class="text-base font-semibold text-white">App Passageiro</p>
+                            <p class="text-xs text-darkLightText">App Store</p>
+                        </div>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-darkLightText" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                </a>
+            </div>
+            <div id="motoristaContent" class="tab-content space-y-3">
+                <!-- Link: App Motorista - Android -->
+                <a href="https://play.google.com/store/apps/details?id=production.urban.driver" target="_blank" rel="noopener noreferrer"
+                   class="link-card flex items-center justify-between animate-in delay-4">
+                    <div class="flex items-center">
+                        <!-- Ícone Google Play Store SVG com novo ícone -->
+                        <svg class="h-6 w-6 mr-3" height="200px" width="200px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 511.999 511.999" xml:space="preserve" fill="#000000">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                            <g id="SVGRepo_iconCarrier">
+                                <g>
+                                    <path style="fill:#32BBFF;" d="M382.369,175.623C322.891,142.356,227.427,88.937,79.355,6.028 C69.372-0.565,57.886-1.429,47.962,1.93l254.05,254.05L382.369,175.623z"></path>
+                                    <path style="fill:#32BBFF;" d="M47.962,1.93c-1.86,0.63-3.67,1.39-5.401,2.308C31.602,10.166,23.549,21.573,23.549,36v439.96 c0,14.427,8.052,25.834,19.012,31.761c1.728,0.917,3.537,1.68,5.395,2.314L302.012,255.98L47.962,1.93z"></path>
+                                    <path style="fill:#32BBFF;" d="M302.012,255.98L47.956,510.035c9.927,3.384,21.413,2.586,31.399-4.103 c143.598-80.41,237.986-133.196,298.152-166.746c1.675-0.941,3.316-1.861,4.938-2.772L302.012,255.98z"></path>
+                                </g>
+                                <path style="fill:#2C9FD9;" d="M23.549,255.98v219.98c0,14.427,8.052,25.834,19.012,31.761c1.728,0.917,3.537,1.68,5.395,2.314 L302.012,255.98H23.549z"></path>
+                                <path style="fill:#29CC5E;" d="M79.355,6.028C67.5-1.8,53.52-1.577,42.561,4.239l255.595,255.596l84.212-84.212 C322.891,142.356,227.427,88.937,79.355,6.028z"></path>
+                                <path style="fill:#D93F21;" d="M298.158,252.126L42.561,507.721c10.96,5.815,24.939,6.151,36.794-1.789 c143.598-80.41,237.986-133.196,298.152-166.746c1.675-0.941,3.316-1.861,4.938-2.772L298.158,252.126z"></path>
+                                <path style="fill:#FFD500;" d="M488.45,255.98c0-12.19-6.151-24.492-18.342-31.314c0,0-22.799-12.721-92.682-51.809l-83.123,83.123 l83.204,83.205c69.116-38.807,92.6-51.892,92.6-51.892C482.299,280.472,488.45,268.17,488.45,255.98z"></path>
+                                <path style="fill:#FFAA00;" d="M470.108,287.294c12.191-6.822,18.342-19.124,18.342-31.314H294.303l83.204,83.205 C446.624,300.379,470.108,287.294,470.108,287.294z"></path>
+                            </g>
+                        </svg>
+                        <div>
+                            <p class="text-base font-semibold text-white">App Motorista</p>
+                            <p class="text-xs text-darkLightText">Google Play</p>
+                        </div>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-darkLightText" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                </a>
+                <!-- Link: App Motorista - iOS -->
+                <a href="https://apps.apple.com/br/app/urban-motorista-app/id1515298608" target="_blank" rel="noopener noreferrer"
+                   class="link-card flex items-center justify-between">
+                    <div class="flex items-center">
+                        <!-- Ícone Apple App Store SVG com novo ícone -->
+                        <svg class="h-6 w-6 mr-3" viewBox="0 0 256 256" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" fill="#000000">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                            <g id="SVGRepo_iconCarrier">
+                                <defs>
+                                    <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-1">
+                                        <stop stop-color="#17C9FB" offset="0%"> </stop>
+                                        <stop stop-color="#1A74E8" offset="100%"> </stop>
+                                    </linearGradient>
+                                </defs>
+                                <g>
+                                    <path d="M56.0638473,0 L199.936153,0 C230.899361,-6.57084692e-15 256,25.1006394 256,56.0638473 L256,199.936153 C256,230.899361 230.899361,256 199.936153,256 L56.0638473,256 C25.1006394,256 0,230.899361 0,199.936153 L0,56.0638473 C0,25.1006394 25.1006394,6.57084692e-15 56.0638473,0 Z" fill="url(#linearGradient-1)"> </path>
+                                    <path d="M82.041678,185.810289 L82.0657467,185.817889 L73.3130924,200.977891 C70.1182861,206.51167 63.0418283,208.407779 57.5080489,205.212719 C51.9745229,202.018166 50.0784142,194.941709 53.2732205,189.407929 L59.7211046,178.240042 L60.3397975,177.16835 C61.4449319,175.579561 64.1720448,172.838767 69.6270308,173.353838 C69.6270308,173.353838 82.4637674,174.747037 83.3925667,181.418887 C83.3928201,181.418887 83.5194976,183.614461 82.041678,185.810289 L82.041678,185.810289 Z M206.18511,147.089287 L178.890925,147.089287 C177.032313,146.96489 176.22031,146.3011 175.901843,145.915241 L175.881574,145.880024 L146.663918,95.2738878 L146.626168,95.2992233 L144.873712,92.786702 C142.002187,88.3953002 137.442051,99.6272864 137.442051,99.6272864 C131.997452,112.142769 138.21453,126.372451 140.382488,130.673152 L180.963875,200.962183 C184.158428,206.495962 191.234886,208.392071 196.768665,205.197011 C202.302191,202.002458 204.1983,194.926001 201.003494,189.392221 L190.855613,171.815973 C190.659263,171.390337 190.316981,170.233771 192.398038,170.229211 L206.18511,170.229211 C212.574975,170.229211 217.755071,165.049115 217.755071,158.659249 C217.755071,152.269383 212.574975,147.089287 206.18511,147.089287 Z M153.171088,162.818324 C153.171088,162.818324 154.627879,170.228957 148.99073,170.228957 L143.353582,170.228957 L143.353582,170.229211 L48.0918579,170.229211 C41.701992,170.229211 36.5218962,165.049115 36.5218962,158.659249 C36.5218962,152.269383 41.701992,147.089287 48.0918579,147.089287 L74.0318604,147.089287 C78.2198182,146.846573 79.2127163,144.42906 79.2127163,144.42906 L79.2355183,144.440715 L113.095904,85.7925846 L113.08577,85.7905577 C113.703196,84.6575543 113.189139,83.5871295 113.099704,83.417635 L101.917376,64.0494072 C98.7223163,58.5156278 100.618425,51.4394233 106.152204,48.244617 C111.685984,45.0495574 118.761935,46.9456661 121.956994,52.4794455 L127.143171,61.4623995 L132.320226,52.4954068 C135.515033,46.9616274 142.591237,45.0655188 148.125016,48.2605784 C153.658796,51.455638 155.554904,58.5318425 152.359845,64.0653685 L105.242153,145.675313 C105.036176,146.172142 104.97309,146.951969 106.505888,147.089287 L134.670094,147.089287 L134.676174,147.363671 C134.676174,147.363671 150.954231,147.617026 153.171088,162.818324 Z" fill="#FFFFFF" fill-rule="nonzero"> </path>
+                                </g>
+                            </g>
+                        </svg>
+                        <div>
+                            <p class="text-base font-semibold text-white">App Motorista</p>
+                            <p class="text-xs text-darkLightText">App Store</p>
+                        </div>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-darkLightText" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+        <!-- Rodapé -->
+        <footer class="text-xs text-darkLightText mt-6 text-center animate-in delay-7">
+            Conectando pessoas • &copy; 2025 UrbanMT
+        </footer>
+    </div>
+    <script>
+        function openTab(tabName) {
+            // Remove a classe 'active' de todos os botões e conteúdos
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabButtons.forEach(button => button.classList.remove('active'));
+            tabContents.forEach(content => {
+                content.classList.remove('active');
+                // Remove animate-in classes when switching tabs to allow re-animation if needed
+                content.querySelectorAll('.animate-in').forEach(el => {
+                    el.classList.remove('animate-in', 'delay-4', 'delay-5', 'delay-6');
+                });
+            });
+            // Adiciona a classe 'active' ao botão clicado e ao conteúdo correspondente
+            const activeTabContent = document.getElementById(tabName + 'Content');
+            document.getElementById('tab' + tabName.charAt(0).toUpperCase() + tabName.slice(1)).classList.add('active');
+            activeTabContent.classList.add('active');
+            // Re-apply animate-in classes to the links within the newly active tab content
+            let delay = 4;
+            activeTabContent.querySelectorAll('.link-card').forEach(linkCard => {
+                linkCard.classList.add('animate-in', `delay-${delay}`);
+                delay++;
+            });
+        }
+        // Garante que a primeira aba (Suporte) esteja ativa ao carregar a página
+        document.addEventListener('DOMContentLoaded', () => {
+            openTab('suporte');
+        });
+    </script>
+</body>
+</html>
+```
